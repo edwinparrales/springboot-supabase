@@ -7,16 +7,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Optional;
 
-public final class CategoriaModel {
+public  class CategoriaModel implements Serializable {
+    private  Integer id;
 
-    private final Integer id;
+    private  LocalDate createat;
 
-    private final LocalDate createat;
-
-    private final String nombrecategoria;
+    private  String nombrecategoria;
+    CategoriaModel() {}
 
     private CategoriaModel(Builder builder) {
         this.id = builder.id;

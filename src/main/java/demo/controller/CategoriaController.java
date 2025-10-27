@@ -1,12 +1,15 @@
 package demo.controller;
 
+import demo.entity.Categoria;
 import demo.model.CategoriaModel;
+import demo.repository.CategoriaRepository;
 import demo.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -14,6 +17,8 @@ import java.util.List;
 public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
 
     @GetMapping
@@ -24,7 +29,13 @@ public class CategoriaController {
     @PostMapping
     public ResponseEntity<CategoriaModel> save(@RequestBody CategoriaModel categoriaModel) {
 
-        return new ResponseEntity<>(categoriaService.create(categoriaModel),HttpStatus.CREATED);
+
+        CategoriaModel cm = new CategoriaModel.Builder()
+                .nombrecategoria(categoriaModel.getNombrecategoria())
+                .createat(categoriaModel.getCreateat()==null?LocalDate.now():categoriaModel.getCreateat())
+                .build();
+
+        return new ResponseEntity<>(categoriaService.create(cm),HttpStatus.CREATED);
 
     }
 }
