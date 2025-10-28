@@ -32,4 +32,8 @@ public class CategoriaController {
         return new ResponseEntity<>(categoriaService.create(categoriaModel),HttpStatus.CREATED);
 
     }
+    @PutMapping
+    public ResponseEntity<CategoriaModel> update(@RequestBody CategoriaModel categoriaModel) {
+        return new ResponseEntity<>(categoriaService.update(categoriaModel),HttpStatus.CREATED);
+    }
 }

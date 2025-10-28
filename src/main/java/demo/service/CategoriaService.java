@@ -24,6 +24,7 @@ public class CategoriaService {
 
             return toCategoriaModel(categoria);
         }).collect(Collectors.toList());
+
         return categoriasModel;
      }
 
@@ -36,6 +37,19 @@ public class CategoriaService {
        Categoria categoria = toCategoria(cm);
 
        return toCategoriaModel(categoriaRepository.save(categoria));
+
+    }
+
+    public CategoriaModel update(CategoriaModel categoriaModel) {
+
+        Categoria categoria = categoriaRepository.findById(categoriaModel.getId());
+        if (categoria != null) {
+            categoria.setNombrecategoria(categoriaModel.getNombrecategoria());
+            categoria.setCreateat(categoriaModel.getCreateat());
+            return toCategoriaModel(categoriaRepository.save(categoria));
+        }else {
+            return null;
+        }
 
     }
 
