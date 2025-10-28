@@ -29,7 +29,11 @@ public class CategoriaService {
 
 
     public CategoriaModel create(CategoriaModel categoriaModel) {
-       Categoria categoria = toCategoria(categoriaModel);
+        CategoriaModel cm = new CategoriaModel.Builder()
+                .nombrecategoria(categoriaModel.getNombrecategoria())
+                .createat(categoriaModel.getCreateat()==null?LocalDate.now():categoriaModel.getCreateat())
+                .build();
+       Categoria categoria = toCategoria(cm);
 
        return toCategoriaModel(categoriaRepository.save(categoria));
 

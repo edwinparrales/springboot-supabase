@@ -29,13 +29,7 @@ public class CategoriaController {
     @PostMapping
     public ResponseEntity<CategoriaModel> save(@RequestBody CategoriaModel categoriaModel) {
 
-
-        CategoriaModel cm = new CategoriaModel.Builder()
-                .nombrecategoria(categoriaModel.getNombrecategoria())
-                .createat(categoriaModel.getCreateat()==null?LocalDate.now():categoriaModel.getCreateat())
-                .build();
-
-        return new ResponseEntity<>(categoriaService.create(cm),HttpStatus.CREATED);
+        return new ResponseEntity<>(categoriaService.create(categoriaModel),HttpStatus.CREATED);
 
     }
 }
